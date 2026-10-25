@@ -2,6 +2,7 @@ package com.mhbeep32.layerdraw
 
 import android.app.Activity
 import android.os.Bundle
+import android.content.pm.ActivityInfo
 import android.graphics.*
 import android.view.*
 import android.widget.*
@@ -20,6 +21,8 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        window.setDecorFitsSystemWindows(false)
         window.statusBarColor = Color.rgb(245,245,245)
         window.navigationBarColor = Color.BLACK
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or
@@ -42,7 +45,7 @@ class MainActivity : Activity() {
             isHorizontalScrollBarEnabled = false
             addView(bar)
         }
-        root.addView(scroll, LinearLayout.LayoutParams(-1,60))
+        root.addView(scroll, LinearLayout.LayoutParams(-1,56))
 
         board = Board()
         root.addView(board, LinearLayout.LayoutParams(-1,0,1f))
@@ -125,7 +128,10 @@ class MainActivity : Activity() {
             style = Paint.Style.STROKE
         }
 
-        init { setLayerType(View.LAYER_TYPE_SOFTWARE,null) }
+        init {
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+            setBackgroundColor(Color.WHITE)
+        }
 
         fun addLayer(b: Bitmap) {
             val maxW = width * 0.65f
