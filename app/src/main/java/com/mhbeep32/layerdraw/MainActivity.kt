@@ -9,6 +9,11 @@ import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 
 class MainActivity : Activity() {
+
+    data class Layer(var bmp: Bitmap, var x: Float, var y: Float, var w: Float, var h: Float)
+    data class Stroke(val path: Path, val color: Int, val width: Float)
+
+
     private lateinit var board: Board
     private lateinit var bar: LinearLayout
     private var hidden = false
@@ -102,8 +107,6 @@ class MainActivity : Activity() {
         var mode = "pen"
         var ink = Color.RED
 
-        data class Layer(var bmp: Bitmap, var x: Float, var y: Float, var w: Float, var h: Float)
-        data class Stroke(val path: Path, val color: Int, val width: Float)
 
         private val layers = mutableListOf<Layer>()
         private val strokes = mutableListOf<Stroke>()
